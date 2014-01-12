@@ -16,30 +16,17 @@ function removeUnderline(){
 	this.style.color = 'blue';
 };
 
-<<<<<<< HEAD
 /* Authorization using Facebook */
 var cleareyesRef = new Firebase('https://laputianzen.firebaseio.com/');
 var myUserID = null;
 var auth = new FirebaseSimpleLogin(cleareyesRef, function(error, user) {
 	if(user) {
 		myUserID = user.id;
-=======
-var cleareyesRef = new Firebase('https://laputianzen.firebaseio.com/');
-var myUserID     = null;
-var auth         = FirebaseSimpleLogin(cleareyesRef, function(error, user) {
-	if(user) {
-		myUserID = user.id;		
->>>>>>> 5b81697693d628ae0caa8df8bf662bbf5826981d
 	}
 });
 
 FB_Login.addEventListener('click', mouseClick, false);
 function mouseClick(){
 	auth.login('facebook');
-<<<<<<< HEAD
 	document.location.href = 'search_place.html';
-}
-=======
-	//document.location.href = 'search_place.html';
 };
->>>>>>> 5b81697693d628ae0caa8df8bf662bbf5826981d
