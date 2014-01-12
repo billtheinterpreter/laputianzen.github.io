@@ -15,3 +15,17 @@ function removeUnderline(){
 	this.style.textDecoration = 'none';
 	this.style.color = 'blue';
 };
+
+var cleareyesRef = new Firebase('https://laputianzen.firebaseio.com/');
+var myUserID     = null;
+var auth         = FirebaseSimpleLogin(cleareyesRef, function(error, user) {
+	if(user) {
+		myUserID = user.id;		
+	}
+});
+
+FB_Login.addEventListener('click', mouseClick, false);
+function mouseClick(){
+	auth.login('facebook');
+	//document.location.href = 'search_place.html';
+};
