@@ -11,15 +11,15 @@ body {
 }
 
 #WebsiteName {
-	color: red;
+	/*color: red;*/
 	font-size: 12em;
 	position: 30% 10%;
 }
 
 .clickable {
-	color:     blue;
+	/*color:     blue;*/
 	font-size: 1em;
-	text-decoration: underline;
+	/*text-decoration: underline*/;
 }
 
 .centerDiv {
