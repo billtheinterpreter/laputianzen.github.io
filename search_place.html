@@ -68,6 +68,7 @@
     </style>
     <title>Places search box</title>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&languages=zh-tw"></script>
+    <script src="load_test_map_tag.js"></script>
     <script>
 // This example adds a search box to a map, using the Google Place Autocomplete
 // feature. People can enter geographical searches. The search box will return a
@@ -76,43 +77,60 @@
 function initialize() {
 
   var markers = [];
-  var gongguan = new google.maps.LatLng(25.015183,121.534474);
+  var NTU = new google.maps.LatLng(25.018352,121.533659);
   var map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 15,
-    center: gongguan,
+    center: NTU,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
-  var gongguan_marker = new google.maps.Marker({
-    position: gongguan,
+  for (var i=0; i < mapLocationArray.length; i++) {
+    var location = new google.maps.LatLng(mapLocationArray[i].latitude,mapLocationArray[i].longitude);
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map,
+      title: mapLocationArray[i].title,
+      setIcon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+    });
+    //markers.push(marker);
+    //marker.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+  }
+
+  /*for (var i=0; i< markers.length; i++) {
+    markers.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
+  }*/
+
+  var NTU_marker = new google.maps.Marker({
+    position: NTU,
     map: map,
     title: '公館'
   });
-  gongguan_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
+
+  NTU_marker.setIcon('http://maps.google.com/mapfiles/ms/icons/yellow-dot.png');
 
 
   var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">Gongguan</h1>'+
+      '<h1 id="firstHeading" class="firstHeading">NTU</h1>'+
       '<div id="bodyContent">'+ '<p> 簡單的公館商圈介紹 </p>' +    
       '<img src="http://www.lanfox.com.tw/uploads/13124292386448zz.jpg" height="150" width="200">'+ '<br>' +
       "<iframe width='250' height='167' src='http://www.youtube.com/embed/eLRlHcCiNjg' frameborder='0' ></iframe>" +
       '</div>'+
       // chat room link
-      '<a href = chat_room.html> 進入聊天室 </a>' +
+      '<a href = firetube.html> 進入聊天室 </a>' +
       '</div>';
 
   var infowindow = new google.maps.InfoWindow({
       content: contentString
   });
   
-  google.maps.event.addListener(gongguan_marker, 'click', function() {
-    infowindow.open(map,gongguan_marker);
+  google.maps.event.addListener(NTU_marker, 'click', function() {
+    infowindow.open(map,NTU_marker);
   });
 
-
-  /*var defaultBounds = new google.maps.LatLngBounds(
+  /*
+  var defaultBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(-33.8902, 151.1759),
       new google.maps.LatLng(-33.8474, 151.2631));
   map.fitBounds(defaultBounds);
@@ -131,15 +149,15 @@ function initialize() {
   google.maps.event.addListener(searchBox, 'places_changed', function() {
     var places = searchBox.getPlaces();
 
-    /*for (var i = 0, marker; marker = markers[i]; i++) {
+    for (var i = 0, marker; marker = markers[i]; i++) {
       marker.setMap(null);
-    }*/
-
-    // turn previous marker into red
-    for (var key in markers){
-      markers[key].setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
     }
 
+    // turn previous marker into red
+    /*for (var key in markers){
+      markers[key].setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+    }
+    */
     // For each place, get the icon, place name, and location.
     //markers = [];
     var bounds = new google.maps.LatLngBounds();
@@ -159,7 +177,7 @@ function initialize() {
         title: place.name,
         position: place.geometry.location
       });
-      marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+      //marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
 
       markers.push(marker);
 
@@ -176,6 +194,7 @@ function initialize() {
     var bounds = map.getBounds();
     searchBox.setBounds(bounds);
   });
+
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -184,6 +203,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <style>
       #target {
         width: 345px;
+      }
+      #logout {
+        position: fixed;
+        bottom: 330px;
+        right: 30px;
       }
     </style>
 
@@ -197,7 +221,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       function mouseClick(){
         //logging.style.color='red';
         //auth.logout();
-        document.location.href="fb_login.html";
+        document.location.href="index.html";
       };
     </script>
     <div id="map-canvas"></div>
