@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- iOS and android will fixed at full-screen -->
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -177,7 +178,7 @@ function initialize() {
         title: place.name,
         position: place.geometry.location
       });
-      //marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+      marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
 
       markers.push(marker);
 
@@ -213,8 +214,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
   </head>
   <body>
+    <header>
+      <div> 
+        <p>Hello World@ 蔡宗諭 </p>
+      </div>
+      <input type="button" id="logout" value="登出">
+    </header>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <input type="button" id="logout" value="登出">
+    
     <script >
       var Logout = document.getElementById('logout');
       Logout.addEventListener('click',mouseClick ,false);
