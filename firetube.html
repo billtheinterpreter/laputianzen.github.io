@@ -1,6 +1,7 @@
 <html>
 <head>
-  <title>Chat Room</title>
+  <meta charset="utf-8">
+  <title>FireTube</title>
   <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
   <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -9,10 +10,11 @@
   <script type="text/javascript" src="firetube.js"></script>
   <link rel="stylesheet" type="text/css" href="firetube.css">
 </head>
-  <img class="pic" src="https://graph.facebook.com/{{userid}}/picture">
+
 <body>
+<a href="search_place.html">離開聊天室</a>
 <div id="loginDiv">
-  
+  <a href="#" onclick="onLoginButtonClicked()" id="login">Login</a>
 </div>
 <img id="video" src="twinkie.png"/>
 
