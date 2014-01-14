@@ -19,6 +19,8 @@ body {
   border: 1px solid #ddd;
   background: #fff;
   min-height: 50px;
+  word-wrap: break-word; 
+  word-break: normal;
 }
 .pic {
   padding-right: 10px;
