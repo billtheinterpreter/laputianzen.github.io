@@ -176,15 +176,19 @@ function initialize() {
         map: map,
         //icon: images,
         title: place.name,
-        position: place.geometry.location
+        position: place.geometry.location,
+        draggable: true
       });
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
 
       markers.push(marker);
 
-      bounds.extend(place.geometry.location);
+      //bounds.extend(place.geometry.location);
     }
-
+    //set map center to search address
+    map.setCenter(markers[0].position);
+    // fix zoom size at 15
+    map.setZoom(15);
     //map.fitBounds(bounds);
   });
   // [END region_getplaces]
