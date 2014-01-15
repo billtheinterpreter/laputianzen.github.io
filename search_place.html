@@ -78,6 +78,7 @@
 function initialize() {
 
   var markers = [];
+  var infoWindows =[];
   var NTU = new google.maps.LatLng(25.018352,121.533659);
   var map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 15,
@@ -85,7 +86,9 @@ function initialize() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
-  for (var i=0; i < mapLocationArray.length; i++) {
+  setMarkers(map,mapLocationArray);
+
+/*  for (var i=0; i < mapLocationArray.length; i++) {
     var location = new google.maps.LatLng(mapLocationArray[i].latitude,mapLocationArray[i].longitude);
     var marker = new google.maps.Marker({
       position: location,
@@ -95,13 +98,37 @@ function initialize() {
     });
     //markers.push(marker);
     //marker.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
-  }
+    var infowindow_previous = new google.maps.InfoWindow();
+    var content = mapLocationArray[i].contentString;
+    google.maps.event.addListener(marker,'click', function(marker,content,infowindow_previous){
+      //return function(){
+      //closeInfos();
+      infowindow_previous.setContent(content);
+      infowindow_previous.open(map, marker);
+      infoWindows[0]=infowindow_previous;
+      //}
+    });
 
+  }
+  */
+  /*function closeInfo(){
+    if (infoWindows.length > 0){
+  */    /* detach the info-window from the marker ... undocumented in the API docs */
+  //    infoWindows[0].set("marker",null);
+
+      /* and close it */
+  //    infoWindows[0].close();
+
+      /* blank the array */
+  /*    infoWindows.length = 0;
+    }
+  }
+*/
   /*for (var i=0; i< markers.length; i++) {
     markers.setIcon("http://maps.google.com/mapfiles/ms/icons/red-dot.png");
   }*/
 
-  var NTU_marker = new google.maps.Marker({
+ /* var NTU_marker = new google.maps.Marker({
     position: NTU,
     map: map,
     title: '公館'
@@ -129,7 +156,7 @@ function initialize() {
   google.maps.event.addListener(NTU_marker, 'click', function() {
     infowindow.open(map,NTU_marker);
   });
-
+ */
   /*
   var defaultBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(-33.8902, 151.1759),
@@ -180,6 +207,17 @@ function initialize() {
         draggable: true
       });
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+      var infowindow_new = new google.maps.InfoWindow();
+      //infowindow_new.disableAutoPan(false);
+      //google.maps.event.addListener(marker,'click', function(marker,default_content, infowindow_new){
+        //closeInfo();
+        //infowindow_new.disableAutoPan(true);
+      google.maps.event.addListener(marker,'click', function(e){ 
+        infowindow_new.setContent(default_content);
+        infowindow_new.open(map, this);
+        //infoWindows[0]=infowindow_new;
+
+      }(marker, default_content, infowindow_new));
 
       markers.push(marker);
 
@@ -201,6 +239,44 @@ function initialize() {
   });
 
 }
+var infoWindows=[]
+
+function setMarkers(map, mapInfos){
+  for (var i=0; i< mapInfos.length; i++){
+    latlngset = new google.maps.LatLng(mapInfos[i].latitude, mapInfos[i].longitude);
+    var marker = new google.maps.Marker({
+      map: map, title: mapInfos[i].title, position:latlngset
+    });
+    marker.setIcon(mapInfos[i].icon);
+    //map.setCenter(marker.getPosition());
+    var content = mapInfos[i].contentString;
+
+    var infowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(marker,'click', function(marker,content,infowindow){
+      return function(){
+        closeInfos();
+        infowindow.setContent(content);
+        infowindow.open(map, marker);
+        infoWindows[0]=infowindow;
+      };
+    }(marker, content, infowindow));
+  }
+}
+function closeInfos(){
+ 
+   if(infoWindows.length > 0){
+ 
+      /* detach the info-window from the marker ... undocumented in the API docs */
+      infoWindows[0].set("marker", null);
+ 
+      /* and close it */
+      infoWindows[0].close();
+ 
+      /* blank the array */
+      infoWindows.length = 0;
+   }
+}
+
 
 google.maps.event.addDomListener(window, 'load', initialize);
 
