@@ -3,12 +3,13 @@ var commentsRef = new Firebase('https://laputianzen.firebaseio.com/comments');
 var myUserID = null;
 
 //Create an Firebase Simple Login client so we can do Facebook auth
-var auth = new FirebaseSimpleLogin(commentsRef, function(error, user) {
+/*var auth = new FirebaseSimpleLogin(commentsRef, function(error, user) {
   if(user) {
     myUserID = user.id;
     $("#loginDiv").text(user.first_name + " " + user.last_name);
   }
 });
+*/
 
 //Create a query for only the last 10 comments
 var last10Comments = commentsRef.limit(10);

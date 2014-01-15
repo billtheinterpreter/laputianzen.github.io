@@ -17,9 +17,9 @@ function removeUnderline(){
 };
 
 /* Authorization using Facebook */
-var cleareyesRef = new Firebase('https://laputianzen.firebaseio.com/');
-var myUserID = null;
-var auth = new FirebaseSimpleLogin(cleareyesRef, function(error, user) {
+//var cleareyesRef = new Firebase('https://laputianzen.firebaseio.com/');
+//var myUserID = null;
+var auth = new FirebaseSimpleLogin(commentsRef, function(error, user) {
 	if(user) {
 		myUserID = user.id;
 	}
