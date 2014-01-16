@@ -209,10 +209,10 @@ function initialize() {
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
       var infowindow_new = new google.maps.InfoWindow();
       //infowindow_new.disableAutoPan(false);
-      //google.maps.event.addListener(marker,'click', function(marker,default_content, infowindow_new){
+      google.maps.event.addListener(marker,'click', function(marker,default_content, infowindow_new){
         //closeInfo();
         //infowindow_new.disableAutoPan(true);
-      google.maps.event.addListener(marker,'click', function(e){ 
+    //google.maps.event.addListener(marker,'click', function(e){ 
         infowindow_new.setContent(default_content);
         infowindow_new.open(map, this);
         //infoWindows[0]=infowindow_new;
