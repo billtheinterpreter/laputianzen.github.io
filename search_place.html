@@ -208,7 +208,7 @@ function initialize() {
       });
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
       var infowindow_new = new google.maps.InfoWindow();
-      //infowindow_new.disableAutoPan(false);
+      infowindow_new.disableAutoPan(false);
       google.maps.event.addListener(marker,'click', function(marker,default_content, infowindow_new){
         //closeInfo();
         //infowindow_new.disableAutoPan(true);
